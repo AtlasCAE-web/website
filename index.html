@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATLAS CAE — Certificados de Ahorro Energético</title>
+  <meta name="description" content="ATLAS CAE gestiona todo el proceso de certificación energética: identificamos el ahorro, tramitamos la documentación y monetizamos tu CAE. Sin complicaciones.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div id="scroll-bar" aria-hidden="true"></div>
+
+<!-- ═══ HEADER ═══════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <a class="logo" href="index.html" aria-label="ATLAS CAE — inicio">
+    <span class="logo-mark" aria-hidden="true">
+      <svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="2" y1="38" x2="18" y2="6" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="34" y1="38" x2="18" y2="6" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="9" y1="25" x2="27" y2="25" stroke="#00C49A" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="18" cy="6" r="4.5" fill="#00C49A"/>
+      </svg>
+    </span>
+    <span>
+      <span class="logo-name">ATLAS</span>
+      <span class="logo-sub">Certificados de Ahorro Energético</span>
+    </span>
+  </a>
+  <nav class="header-nav" aria-label="Navegación principal">
+    <a href="ayuda.html">Cómo funciona</a>
+    <a href="nosotros.html">Nosotros</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="calculadora.html" class="header-cta">Calcular ahorro</a>
+  </nav>
+  <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" aria-label="Menú móvil">
+  <a href="ayuda.html">Cómo funciona</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="calculadora.html" class="mobile-cta">Calcular ahorro</a>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<section id="hero" aria-label="Inicio">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-rings" aria-hidden="true">
+    <svg viewBox="0 0 600 600" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="300" r="80"  stroke="#1B9ED4" stroke-width="1"/>
+      <circle cx="300" cy="300" r="150" stroke="#1B9ED4" stroke-width="1"/>
+      <circle cx="300" cy="300" r="220" stroke="#1B9ED4" stroke-width="1"/>
+      <circle cx="300" cy="300" r="290" stroke="#1B9ED4" stroke-width="1"/>
+      <circle cx="300" cy="300" r="360" stroke="#1B9ED4" stroke-width="1"/>
+      <circle cx="300" cy="300" r="430" stroke="#1B9ED4" stroke-width="0.8"/>
+      <circle cx="300" cy="300" r="500" stroke="#1B9ED4" stroke-width="0.6"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      Especialistas CAE · España
+    </div>
+    <h1 class="hero-h1">
+      Convertimos<br>
+      <span class="accent">el ahorro en valor.</span>
+    </h1>
+    <p class="hero-sub">
+      Gestionamos todo el ciclo de los Certificados de Ahorro Energético:
+      identificamos qué ahorros tienes, los certificamos y los monetizamos.
+      Sin burocracia, sin sorpresas.
+    </p>
+    <div class="hero-actions">
+      <a href="calculadora.html" class="btn-hero-primary">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M9.5 2L4 9h4.5L7 14 13 7H8.5L9.5 2z" fill="currentColor"/>
+        </svg>
+        Calcular mi ahorro CAE
+      </a>
+      <a href="ayuda.html" class="btn-hero-ghost">
+        Ver cómo funciona
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-trust" aria-label="Ventajas clave">
+      <div class="hero-trust-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="#00C49A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sin comisión inicial
+      </div>
+      <div class="hero-trust-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="#00C49A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Pago a éxito
+      </div>
+      <div class="hero-trust-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="#00C49A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Gestión completa del proceso
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ══════════════════════════════════════════ -->
+<div id="stats" aria-label="Cifras clave del mercado">
+  <div class="stats-grid">
+    <div class="stat-item reveal delay-1">
+      <span class="stat-num" data-target="2600" data-suffix=" GWh">0</span>
+      <span class="stat-desc">de obligación anual de ahorro en España</span>
+    </div>
+    <div class="stat-item reveal delay-2">
+      <span class="stat-num" data-target="300" data-prefix="+€" data-suffix="M">0</span>
+      <span class="stat-desc">mercado potencial estimado</span>
+    </div>
+    <div class="stat-item reveal delay-3">
+      <span class="stat-num" data-target="0.13" data-suffix="€">0</span>
+      <span class="stat-desc">precio de mercado por kWh_cumac</span>
+    </div>
+    <div class="stat-item reveal delay-4">
+      <span class="stat-num" data-target="2" data-suffix=" meses">0</span>
+      <span class="stat-desc">plazo máximo de tramitación desde documentación completa</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROCESO ════════════════════════════════════════ -->
+<section id="proceso" style="background:var(--dark-900); border-bottom:1px solid var(--border);" aria-labelledby="proceso-title">
+  <div class="section-wrap">
+    <div class="proceso-header-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4.5rem;">
+      <div class="reveal reveal-left">
+        <div class="section-label">El proceso</div>
+        <h2 class="section-title" id="proceso-title">Del ahorro<br>al certificado.</h2>
+      </div>
+      <p class="section-sub reveal reveal-right" style="max-width:40ch;padding-bottom:.25rem;align-self:end;">
+        El mercado CAE tiene menos de 3 años en España. La mayoría de las empresas no sabe
+        que tiene valor certificable — las que lo saben, no saben cómo tramitarlo.
+        ATLAS traza la ruta y la recorre contigo.
+      </p>
+    </div>
+
+    <div class="steps" role="list">
+      <div class="step reveal" role="listitem">
+        <div class="step-num" aria-hidden="true">01</div>
+        <div class="step-content">
+          <div class="step-title">Cartografiamos el ahorro</div>
+          <p class="step-desc">Identificamos qué actuaciones de tu empresa son certificables bajo la metodología oficial. La mínima desviación técnica puede invalidar años de ahorro — somos exactos.</p>
+          <span class="step-tag">Análisis técnico</span>
+        </div>
+      </div>
+      <div class="step reveal delay-1" role="listitem">
+        <div class="step-num" aria-hidden="true">02</div>
+        <div class="step-content">
+          <div class="step-title">Navegamos la regulación</div>
+          <p class="step-desc">Tramitamos toda la documentación técnica: declaración responsable, facturas, verificación y justificación ante el operador. El proceso tiene 4 fases. Nosotros las gestionamos todas.</p>
+          <span class="step-tag">Gestión integral</span>
+        </div>
+      </div>
+      <div class="step reveal delay-2" role="listitem">
+        <div class="step-num" aria-hidden="true">03</div>
+        <div class="step-content">
+          <div class="step-title">Monetizamos el certificado</div>
+          <p class="step-desc">Gestionamos la venta del CAE a través de un operador acreditado y te transferimos el importe neto. Plazo máximo de 2 meses desde documentación completa, para operaciones que superen los 200 MWh mínimos.</p>
+          <span class="step-tag">0,13 € / kWh_cumac</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem;text-align:center;" class="reveal">
+      <a href="ayuda.html" class="btn-secondary">Ver el proceso en detalle →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA DUAL ════════════════════════════════════════ -->
+<section style="background:var(--dark-800);border-bottom:1px solid var(--border);" aria-label="Próximos pasos">
+  <div class="section-wrap cta-dual-wrap" style="padding-top:5rem;padding-bottom:5rem;">
+    <div class="cta-dual-grid reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+
+      <a href="calculadora.html" class="cta-card-primary" style="display:block;text-decoration:none;background:var(--dark-900);border:1px solid var(--teal-border);border-radius:var(--r-xl);padding:2.5rem;transition:box-shadow .25s,border-color .25s;">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;background:var(--teal-dim);border:1px solid var(--teal-border);border-radius:var(--r-sm);margin-bottom:1.25rem;">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M9.5 2L4 9h4.5L7 14 13 7H8.5L9.5 2z" fill="#00C49A"/>
+          </svg>
+        </div>
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem;">Calculadora de vehículos</div>
+        <h3 style="font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.5rem;color:var(--text-100);">Tienes un vehículo de combustión</h3>
+        <p style="font-size:.9rem;color:var(--text-500);line-height:1.6;max-width:36ch;">Calcula en segundos el potencial económico de tu CAE por sustitución de vehículo.</p>
+        <div style="display:inline-flex;align-items:center;gap:.4rem;margin-top:1.25rem;font-size:.875rem;font-weight:700;color:var(--teal);">
+          Ir a la calculadora
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="contacto.html" class="cta-card-secondary" style="display:block;text-decoration:none;background:var(--dark-900);border:1px solid var(--border-light);border-radius:var(--r-xl);padding:2.5rem;transition:box-shadow .25s,border-color .25s;">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;background:rgba(255,255,255,.04);border:1px solid var(--border-light);border-radius:var(--r-sm);margin-bottom:1.25rem;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M17 3H3a1 1 0 00-1 1v10a1 1 0 001 1h14a1 1 0 001-1V4a1 1 0 00-1-1z" stroke="#94a3b8" stroke-width="1.5"/>
+            <path d="M2 5l8 6 8-6" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-500);margin-bottom:.5rem;">Otros tipos de CAE</div>
+        <h3 style="font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.5rem;color:var(--text-100);">Tu caso no es de vehículo</h3>
+        <p style="font-size:.9rem;color:var(--text-500);line-height:1.6;max-width:36ch;">Iluminación, climatización, equipamiento industrial, envolvente térmica... Cuéntanos tu proyecto.</p>
+        <div style="display:inline-flex;align-items:center;gap:.4rem;margin-top:1.25rem;font-size:.875rem;font-weight:700;color:var(--text-300);">
+          Hablar con el equipo
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <a class="logo" href="index.html" aria-label="ATLAS CAE — inicio" style="text-decoration:none;">
+        <span class="logo-mark" aria-hidden="true">
+          <svg width="28" height="32" viewBox="0 0 36 40" fill="none">
+            <line x1="2" y1="38" x2="18" y2="6" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="34" y1="38" x2="18" y2="6" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="9" y1="25" x2="27" y2="25" stroke="#00C49A" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="18" cy="6" r="4.5" fill="#00C49A"/>
+          </svg>
+        </span>
+        <span>
+          <span class="logo-name">ATLAS</span>
+          <span class="logo-sub">Certificados de Ahorro Energético</span>
+        </span>
+      </a>
+      <p class="footer-tagline">Convertimos el ahorro en valor.</p>
+    </div>
+    <nav class="footer-links" aria-label="Navegación secundaria">
+      <a href="ayuda.html">Cómo funciona</a>
+      <a href="calculadora.html">Calculadora</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="#" onclick="abrirLegal('aviso-legal');return false;">Aviso Legal</a>
+      <a href="#" onclick="abrirLegal('privacidad');return false;">Privacidad</a>
+      <a href="#" onclick="abrirLegal('cookies');return false;">Cookies</a>
+    </nav>
+    <div class="footer-right">
+      <p class="footer-copy">
+        © 2026 ATLAS CAE, S.L.<br>
+        <a href="mailto:equipo@atlascae.es" style="color:var(--teal);text-decoration:none;font-size:.78rem;">equipo@atlascae.es</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ LEGALES ══════════════════════════════════════════ -->
+<div id="aviso-legal" class="legal-overlay" role="dialog" aria-modal="true" aria-labelledby="al-title">
+  <div class="legal-container">
+    <button class="legal-close" onclick="cerrarLegal('aviso-legal')" aria-label="Cerrar">×</button>
+    <h1 id="al-title">Aviso Legal</h1>
+    <p class="legal-meta">ATLAS CAE, S.L. · <span class="legal-cif">CIF: [CIF PENDIENTE]</span></p>
+    <h2>Identificación del titular</h2>
+    <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio (LSSI-CE):</p>
+    <ul>
+      <li><strong>Razón social:</strong> ATLAS CAE, S.L.</li>
+      <li><strong>CIF:</strong> <span class="legal-cif">[CIF PENDIENTE]</span></li>
+      <li><strong>Domicilio social:</strong> Calle Escorial nº 20, Escalera 8, 1º B, 28690, Madrid</li>
+      <li><strong>Email:</strong> legal@atlascae.es</li>
+    </ul>
+    <h2>Condiciones de uso</h2>
+    <p>El acceso a este sitio implica la aceptación de las presentes condiciones. Los contenidos son informativos y no constituyen asesoramiento técnico, jurídico ni financiero vinculante.</p>
+    <h2>Propiedad intelectual</h2>
+    <p>Todos los contenidos (textos, imágenes, logotipos, código) son propiedad de ATLAS CAE, S.L. o de terceros que han autorizado su uso. Se prohíbe su reproducción sin autorización escrita.</p>
+    <h2>Legislación aplicable</h2>
+    <p>Las presentes condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados de Madrid.</p>
+  </div>
+</div>
+
+<div id="privacidad" class="legal-overlay" role="dialog" aria-modal="true" aria-labelledby="pp-title">
+  <div class="legal-container">
+    <button class="legal-close" onclick="cerrarLegal('privacidad')" aria-label="Cerrar">×</button>
+    <h1 id="pp-title">Política de Privacidad</h1>
+    <p class="legal-meta">ATLAS CAE, S.L. · Cumplimiento RGPD y LOPDGDD</p>
+    <h2>Responsable del tratamiento</h2>
+    <ul>
+      <li><strong>Razón social:</strong> ATLAS CAE, S.L.</li>
+      <li><strong>CIF:</strong> <span class="legal-cif">[CIF PENDIENTE]</span></li>
+      <li><strong>Domicilio:</strong> Calle Escorial nº 20, Escalera 8, 1º B, 28690, Madrid</li>
+      <li><strong>Email:</strong> legal@atlascae.es</li>
+    </ul>
+    <h2>Finalidad</h2>
+    <p>Los datos facilitados se tratan para gestionar consultas y el contacto comercial relacionado con los servicios de ATLAS CAE, S.L.</p>
+    <h2>Base legitimadora</h2>
+    <p>El consentimiento del usuario, expresado al facilitar sus datos (art. 6.1.a RGPD).</p>
+    <h2>Conservación</h2>
+    <p>Los datos se conservan el tiempo necesario para atender la consulta o relación comercial, y los plazos legales aplicables.</p>
+    <h2>Cesión a terceros</h2>
+    <p>No se ceden datos a terceros salvo obligación legal. No se realizan transferencias internacionales fuera del EEE.</p>
+    <h2>Derechos</h2>
+    <p>Puedes ejercitar tus derechos ARCO+ escribiendo a <strong>legal@atlascae.es</strong>. También puedes reclamar ante la AEPD (www.aepd.es).</p>
+  </div>
+</div>
+
+<div id="cookies" class="legal-overlay" role="dialog" aria-modal="true" aria-labelledby="pc-title">
+  <div class="legal-container">
+    <button class="legal-close" onclick="cerrarLegal('cookies')" aria-label="Cerrar">×</button>
+    <h1 id="pc-title">Política de Cookies</h1>
+    <p class="legal-meta">ATLAS CAE, S.L.</p>
+    <h2>Cookies utilizadas</h2>
+    <p>Este sitio usa únicamente <strong>cookies técnicas estrictamente necesarias</strong>:</p>
+    <ul>
+      <li><strong>atlas_cookies_ok</strong> — Almacena la confirmación del aviso de cookies (localStorage). No transmite datos a ningún servidor.</li>
+    </ul>
+    <p>No se utilizan cookies analíticas, publicitarias ni de terceros (Google Analytics, Meta Pixel, etc.).</p>
+    <h2>Consentimiento</h2>
+    <p>Al ser únicamente cookies técnicas imprescindibles, no se requiere consentimiento previo (art. 22.2 LSSI-CE y directrices AEPD).</p>
+    <h2>Desactivación</h2>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Chrome</a></li>
+      <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener noreferrer">Firefox</a></li>
+      <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ COOKIE BANNER ════════════════════════════════════ -->
+<div id="cookie-banner" class="hidden" role="complementary" aria-label="Aviso de cookies">
+  <p>Esta web usa únicamente cookies técnicas necesarias para su funcionamiento.
+    <a href="#" onclick="cerrarCookieBanner();abrirLegal('cookies');return false;">Más información</a>
+  </p>
+  <button onclick="cerrarCookieBanner()">Entendido</button>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+/* ── Hero particle system ─────────────────────────── */
+(function () {
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var hero = document.getElementById('hero');
+
+  var mouse = { x: -9999, y: -9999, active: false };
+  var particles = [];
+  var W, H;
+
+  var COUNT       = window.innerWidth < 600 ? 40 : 90;
+  var LINK_DIST   = 120;
+  var MOUSE_DIST  = 160;
+  var R = 0, G = 196, B = 154;          /* teal #00C49A */
+
+  function resize() {
+    W = canvas.width  = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+
+  function Particle() {
+    this.x  = Math.random() * W;
+    this.y  = Math.random() * H;
+    this.vx = (Math.random() - .5) * .45;
+    this.vy = (Math.random() - .5) * .45;
+    this.r  = Math.random() * 1.8 + .6;
+    this.base = Math.random() * .5 + .15;
+    this.a  = this.base;
+  }
+
+  Particle.prototype.tick = function () {
+    var dx = this.x - mouse.x;
+    var dy = this.y - mouse.y;
+    var d2 = dx * dx + dy * dy;
+    var md = MOUSE_DIST * MOUSE_DIST;
+
+    if (mouse.active && d2 < md) {
+      var f = (1 - d2 / md) * .12;
+      var len = Math.sqrt(d2) || 1;
+      this.vx += (dx / len) * f;
+      this.vy += (dy / len) * f;
+      this.a = Math.min(1, this.base + (1 - d2 / md) * .85);
+    } else {
+      this.a += (this.base - this.a) * .04;
+    }
+
+    var sp = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+    if (sp > 2.2) { this.vx *= .93; this.vy *= .93; }
+    this.vx *= .992; this.vy *= .992;
+
+    this.x += this.vx;
+    this.y += this.vy;
+
+    if (this.x < 0)  this.x = W;
+    if (this.x > W)  this.x = 0;
+    if (this.y < 0)  this.y = H;
+    if (this.y > H)  this.y = 0;
+  };
+
+  Particle.prototype.draw = function () {
+    var grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 4.5);
+    grd.addColorStop(0,   'rgba(' + R + ',' + G + ',' + B + ',' + this.a + ')');
+    grd.addColorStop(.4,  'rgba(' + R + ',' + G + ',' + B + ',' + (this.a * .4) + ')');
+    grd.addColorStop(1,   'rgba(' + R + ',' + G + ',' + B + ',0)');
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r * 4.5, 0, 6.2832);
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, 6.2832);
+    ctx.fillStyle = 'rgba(' + R + ',' + G + ',' + B + ',' + Math.min(1, this.a * 1.4) + ')';
+    ctx.fill();
+  };
+
+  function drawLinks() {
+    var ld2 = LINK_DIST * LINK_DIST;
+    var md2 = MOUSE_DIST * MOUSE_DIST;
+    for (var i = 0; i < particles.length; i++) {
+      var pi = particles[i];
+      /* particle–particle */
+      for (var j = i + 1; j < particles.length; j++) {
+        var pj = particles[j];
+        var dx = pi.x - pj.x, dy = pi.y - pj.y;
+        var d2 = dx * dx + dy * dy;
+        if (d2 < ld2) {
+          var a = (1 - d2 / ld2) * .12;
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(' + R + ',' + G + ',' + B + ',' + a + ')';
+          ctx.lineWidth = .6;
+          ctx.moveTo(pi.x, pi.y);
+          ctx.lineTo(pj.x, pj.y);
+          ctx.stroke();
+        }
+      }
+      /* particle–mouse */
+      if (mouse.active) {
+        var dmx = pi.x - mouse.x, dmy = pi.y - mouse.y;
+        var dm2 = dmx * dmx + dmy * dmy;
+        if (dm2 < md2) {
+          var am = (1 - dm2 / md2) * .45;
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(' + R + ',' + G + ',' + B + ',' + am + ')';
+          ctx.lineWidth = .9;
+          ctx.moveTo(pi.x, pi.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+    }
+    /* mouse glow dot */
+    if (mouse.active) {
+      var mg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 28);
+      mg.addColorStop(0,   'rgba(' + R + ',' + G + ',' + B + ',.22)');
+      mg.addColorStop(1,   'rgba(' + R + ',' + G + ',' + B + ',0)');
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, 28, 0, 6.2832);
+      ctx.fillStyle = mg;
+      ctx.fill();
+    }
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    drawLinks();
+    for (var i = 0; i < particles.length; i++) {
+      particles[i].tick();
+      particles[i].draw();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function init() {
+    resize();
+    particles = [];
+    for (var i = 0; i < COUNT; i++) particles.push(new Particle());
+    frame();
+  }
+
+  window.addEventListener('resize', resize);
+
+  hero.addEventListener('mousemove', function (e) {
+    var r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+    mouse.active = true;
+  });
+  hero.addEventListener('mouseleave', function () { mouse.active = false; });
+  hero.addEventListener('touchmove', function (e) {
+    if (e.touches.length === 0) return;
+    var r = canvas.getBoundingClientRect();
+    mouse.x = e.touches[0].clientX - r.left;
+    mouse.y = e.touches[0].clientY - r.top;
+    mouse.active = true;
+  }, { passive: true });
+  hero.addEventListener('touchend', function () { mouse.active = false; });
+
+  init();
+})();
+</script>
+</body>
+</html>

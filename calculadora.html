@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora CAE — ATLAS CAE</title>
+  <meta name="description" content="Calcula el potencial económico de tus Certificados de Ahorro Energético por sustitución de vehículo. Herramienta gratuita de ATLAS CAE.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div id="scroll-bar" aria-hidden="true"></div>
+
+<!-- ═══ HEADER ═══════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <a class="logo" href="index.html" aria-label="ATLAS CAE — inicio">
+    <span class="logo-mark" aria-hidden="true">
+      <svg width="36" height="40" viewBox="0 0 36 40" fill="none">
+        <line x1="2" y1="38" x2="18" y2="6" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="34" y1="38" x2="18" y2="6" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="9" y1="25" x2="27" y2="25" stroke="#00C49A" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="18" cy="6" r="4.5" fill="#00C49A"/>
+      </svg>
+    </span>
+    <span>
+      <span class="logo-name">ATLAS</span>
+      <span class="logo-sub">Certificados de Ahorro Energético</span>
+    </span>
+  </a>
+  <nav class="header-nav" aria-label="Navegación principal">
+    <a href="ayuda.html">Cómo funciona</a>
+    <a href="nosotros.html">Nosotros</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="calculadora.html" class="header-cta current">Calcular ahorro</a>
+  </nav>
+  <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" aria-label="Menú móvil">
+  <a href="ayuda.html">Cómo funciona</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="calculadora.html" class="mobile-cta current">Calcular ahorro</a>
+</nav>
+
+<!-- ═══ PAGE HERO ══════════════════════════════════════ -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-label">Herramienta</div>
+    <h1>Calcula tu<br>potencial CAE.</h1>
+    <p>Un CAE equivale a 1 kWh de ahorro acumulado durante la vida útil de la mejora (kWh_cumac),
+      valorado en el mercado a 0,13&nbsp;€. Esta calculadora es específica para
+      <strong style="color:var(--text-300);">sustitución de vehículos de motor</strong>.
+    </p>
+  </div>
+</div>
+
+<!-- ═══ CALCULADORA ═════════════════════════════════════ -->
+<section style="background:var(--dark-800);border-bottom:1px solid var(--border);" aria-labelledby="herramienta-title">
+  <div class="section-wrap">
+    <div class="calc-layout">
+
+      <!-- Intro -->
+      <div class="calc-intro reveal reveal-left">
+        <div class="section-label">Cómo usar la herramienta</div>
+        <h2 class="section-title" id="herramienta-title" style="margin-bottom:1rem;">Introduce<br>tus datos.</h2>
+        <p>Calcula la estimación, descarga el informe y te ponemos en contacto para revisar tu caso real.</p>
+
+        <div class="calc-feature">
+          <div class="calc-feature-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M9.5 2L4 9h4.5L7 14 13 7H8.5L9.5 2z" fill="#00C49A"/>
+            </svg>
+          </div>
+          <div class="calc-feature-text">
+            <strong>Factores de conversión oficiales</strong>
+            Diesel 10 kWh/L · Gasolina 9,19 · GLP 7,16 · Gas Natural 13,33
+          </div>
+        </div>
+        <div class="calc-feature">
+          <div class="calc-feature-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 4a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4z" stroke="#00C49A" stroke-width="1.5"/>
+              <path d="M5 8h6M5 11h4M5 5h2" stroke="#00C49A" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="calc-feature-text">
+            <strong>Informe PDF descargable</strong>
+            Con tu resultado, explicación del proceso y próximos pasos.
+          </div>
+        </div>
+        <div class="calc-feature">
+          <div class="calc-feature-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6" stroke="#00C49A" stroke-width="1.5"/>
+              <path d="M5 8l2 2 4-4" stroke="#00C49A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="calc-feature-text">
+            <strong>Estimación orientativa</strong>
+            El resultado real depende de verificación técnica. ATLAS lo revisa contigo.
+          </div>
+        </div>
+
+        <!-- CTA bifurcación -->
+        <div class="cta-bifurcacion" style="margin-top:2.5rem;">
+          <div class="cta-bifurcacion-text">
+            <div class="label">¿No tienes un vehículo de combustión?</div>
+            <h3>Tu caso no es de coche.</h3>
+            <p>Iluminación, climatización, equipamiento industrial, envolvente… Cuéntanos tu proyecto y lo analizamos sin compromiso.</p>
+          </div>
+          <a href="contacto.html" class="btn-secondary" style="flex-shrink:0;">Hablar con el equipo →</a>
+        </div>
+      </div>
+
+      <!-- Tool card -->
+      <div class="tool-card reveal reveal-right" aria-label="Herramienta ATLAS CAE">
+        <div class="tool-nav-wrapper">
+          <nav class="tool-nav" aria-label="Secciones de la herramienta">
+            <button id="nav-calculadora" class="active" onclick="showSection('calculadora')" role="tab" aria-selected="true">
+              Calculadora
+            </button>
+            <button id="nav-justificacion" onclick="showSection('justificacion')" role="tab" aria-selected="false">
+              Justificación
+            </button>
+          </nav>
+        </div>
+
+        <!-- Calculadora -->
+        <section id="calculadora" role="tabpanel" aria-labelledby="nav-calculadora">
+          <div class="tool-head">
+            <div class="chip"><span class="chip-dot"></span>Herramienta · Vehículos</div>
+            <h2>Calculadora de Ahorro Energético</h2>
+          </div>
+          <div class="tool-body">
+            <form id="form-calculadora" class="form-stack" autocomplete="off" novalidate>
+
+              <div class="field" id="field-cva">
+                <label for="cva">Consumo vehículo antiguo (L/100 km)</label>
+                <input type="number" id="cva" name="cva"
+                       step="0.01" min="0.1" max="30"
+                       placeholder="p.ej. 7.5" inputmode="decimal">
+                <span class="field-msg" id="msg-cva" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="field" id="field-combustible">
+                <label for="combustible">Combustible vehículo antiguo</label>
+                <select id="combustible" name="combustible">
+                  <option value="diesel">Diésel</option>
+                  <option value="gasolina">Gasolina</option>
+                  <option value="glp">GLP</option>
+                  <option value="gnv">Gas Natural</option>
+                </select>
+              </div>
+
+              <div class="field" id="field-factor">
+                <label for="factor">Factor de conversión (kWh/litro)</label>
+                <input type="number" id="factor" name="factor"
+                       step="0.01" readonly aria-readonly="true" tabindex="-1">
+              </div>
+
+              <div class="field" id="field-cvn">
+                <label for="cvn">Consumo vehículo nuevo (kWh/100 km)</label>
+                <input type="number" id="cvn" name="cvn"
+                       step="0.01" min="0.1" max="80"
+                       placeholder="p.ej. 18.0" inputmode="decimal">
+                <span class="field-msg" id="msg-cvn" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="field" id="field-km">
+                <label for="km_anual">Kilometraje anual previsto (km/año)</label>
+                <input type="number" id="km_anual" name="km_anual"
+                       step="1" min="100" max="300000"
+                       placeholder="p.ej. 15000" inputmode="numeric">
+                <span class="field-msg" id="msg-km" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="resultado-block" role="region" aria-label="Resultados">
+                <div class="resultado-row">
+                  <span class="resultado-label">Ahorro energético estimado</span>
+                  <span class="resultado-valor" id="resultado" aria-live="polite" aria-atomic="true">—</span>
+                </div>
+                <div class="resultado-sep" aria-hidden="true"></div>
+                <div class="resultado-row">
+                  <span class="resultado-label">Valor estimado para ti</span>
+                  <span class="resultado-valor" id="resultado_dinero" aria-live="polite" aria-atomic="true">—</span>
+                </div>
+              </div>
+
+              <!-- PDF gate area (shown only when result is valid) -->
+              <div id="pdf-gate-area" class="pdf-gate-area" style="display:none;">
+                <button type="button" id="btn-abrir-pdf" class="btn-primary full-width">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M4 13h8M8 3v7M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Descargar informe PDF
+                </button>
+                <p class="pdf-gate-note">Introduce tus datos para generar el informe personalizado.</p>
+              </div>
+
+            </form>
+          </div>
+        </section>
+
+        <!-- Justificación -->
+        <section id="justificacion" style="display:none;" role="tabpanel" aria-labelledby="nav-justificacion">
+          <div class="tool-head">
+            <div class="chip"><span class="chip-dot"></span>Documentación</div>
+            <h2>Subida de documentos para justificación</h2>
+          </div>
+          <div class="tool-body">
+            <form id="form-justificacion" class="form-stack" autocomplete="off" novalidate
+                  data-endpoint=""><!-- Añade tu endpoint de subida de archivos aquí -->
+
+              <div class="progreso-wrapper">
+                <div class="progreso-info">
+                  <span class="progreso-label">Progreso</span>
+                  <span class="progreso-steps" id="estado-justificacion" aria-live="polite" aria-atomic="true">Paso 1 de 5</span>
+                </div>
+                <div class="progreso-track" role="progressbar"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"
+                     aria-label="Progreso de carga de documentos">
+                  <div id="barra-progreso"></div>
+                </div>
+              </div>
+
+              <div class="paso-justificacion field">
+                <div class="label-con-boton">
+                  <label for="declaracion_responsable">Declaración responsable formalizada del propietario inicial</label>
+                  <button type="button" class="btn-ghost" onclick="toggleDetalle(this)" aria-expanded="false">Saber más</button>
+                </div>
+                <div class="detalle-saber-mas" role="region">
+                  Documento en el que el propietario inicial declara si ha solicitado o recibido ayudas públicas para esa misma actuación de ahorro energético.
+                </div>
+                <input type="file" id="declaracion_responsable" name="declaracion_responsable"
+                       accept=".pdf,.jpg,.jpeg,.png,.heic,.webp" required aria-describedby="confirm-0 msg-file-0">
+                <span class="field-msg" id="msg-file-0" role="alert" aria-live="polite"></span>
+                <div class="archivo-confirmado" id="confirm-0" aria-live="polite" style="display:none;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="7" fill="#00C49A"/><path d="M3.5 7l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="confirm-label">Archivo seleccionado</span>
+                </div>
+              </div>
+
+              <div class="paso-justificacion field">
+                <div class="label-con-boton">
+                  <label for="facturas">Facturas justificativas</label>
+                  <button type="button" class="btn-ghost" onclick="toggleDetalle(this)" aria-expanded="false">Saber más</button>
+                </div>
+                <div class="detalle-saber-mas" role="region">
+                  Facturas de la adquisición que identifiquen claramente la compra y permitan verificar que corresponde a la actuación subvencionable.
+                </div>
+                <input type="file" id="facturas" name="facturas"
+                       accept=".pdf,.jpg,.jpeg,.png,.heic,.webp" required multiple aria-describedby="confirm-1 msg-file-1">
+                <span class="field-msg" id="msg-file-1" role="alert" aria-live="polite"></span>
+                <div class="archivo-confirmado" id="confirm-1" aria-live="polite" style="display:none;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="7" fill="#00C49A"/><path d="M3.5 7l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="confirm-label">Archivo seleccionado</span>
+                </div>
+              </div>
+
+              <div class="paso-justificacion field">
+                <div class="label-con-boton">
+                  <label for="ficha_tecnica">Ficha técnica del vehículo antiguo</label>
+                  <button type="button" class="btn-ghost" onclick="toggleDetalle(this)" aria-expanded="false">Saber más</button>
+                </div>
+                <div class="detalle-saber-mas" role="region">
+                  Ficha técnica del vehículo antiguo para acreditar sus características y vincularlo al expediente de sustitución.
+                </div>
+                <input type="file" id="ficha_tecnica" name="ficha_tecnica"
+                       accept=".pdf,.jpg,.jpeg,.png,.heic,.webp" required aria-describedby="confirm-2 msg-file-2">
+                <span class="field-msg" id="msg-file-2" role="alert" aria-live="polite"></span>
+                <div class="archivo-confirmado" id="confirm-2" aria-live="polite" style="display:none;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="7" fill="#00C49A"/><path d="M3.5 7l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="confirm-label">Archivo seleccionado</span>
+                </div>
+              </div>
+
+              <div class="paso-justificacion field">
+                <div class="label-con-boton">
+                  <label for="propiedad_antigua">Documento de propiedad del vehículo antiguo</label>
+                  <button type="button" class="btn-ghost" onclick="toggleDetalle(this)" aria-expanded="false">Saber más</button>
+                </div>
+                <div class="detalle-saber-mas" role="region">
+                  Acredita la propiedad durante más de un año.
+                  <ul><li>Permiso de circulación</li><li>Último recibo IVTM</li></ul>
+                </div>
+                <input type="file" id="propiedad_antigua" name="propiedad_antigua"
+                       accept=".pdf,.jpg,.jpeg,.png,.heic,.webp" required aria-describedby="confirm-3 msg-file-3">
+                <span class="field-msg" id="msg-file-3" role="alert" aria-live="polite"></span>
+                <div class="archivo-confirmado" id="confirm-3" aria-live="polite" style="display:none;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="7" fill="#00C49A"/><path d="M3.5 7l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="confirm-label">Archivo seleccionado</span>
+                </div>
+              </div>
+
+              <div class="paso-justificacion field">
+                <div class="label-con-boton">
+                  <label for="no_propiedad">Documento que acredite que el vehículo ya no está en propiedad</label>
+                  <button type="button" class="btn-ghost" onclick="toggleDetalle(this)" aria-expanded="false">Saber más</button>
+                </div>
+                <div class="detalle-saber-mas" role="region">
+                  <ul><li>Certificado de achatarramiento</li><li>Solicitud de cambio de titularidad en la DGT</li></ul>
+                </div>
+                <input type="file" id="no_propiedad" name="no_propiedad"
+                       accept=".pdf,.jpg,.jpeg,.png,.heic,.webp" required aria-describedby="confirm-4 msg-file-4">
+                <span class="field-msg" id="msg-file-4" role="alert" aria-live="polite"></span>
+                <div class="archivo-confirmado" id="confirm-4" aria-live="polite" style="display:none;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="7" fill="#00C49A"/><path d="M3.5 7l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="confirm-label">Archivo seleccionado</span>
+                </div>
+              </div>
+
+              <div class="mensaje-final" id="mensaje-final" aria-live="polite">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#00C49A"/><path d="M4.5 8.5l2.5 2.5 4.5-5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Todos los documentos seleccionados. Ya puedes enviar.
+              </div>
+
+              <div class="form-alert error" id="justificacion-error" style="display:none;" role="alert">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#ef4444" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span></span>
+              </div>
+
+              <button type="submit" id="btn-enviar" class="btn-primary full-width" style="display:none;" aria-label="Subir documentación">
+                Subir documentación
+              </button>
+
+            </form>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PDF GATE MODAL ══════════════════════════════════ -->
+<div id="pdf-modal-overlay" class="pdf-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
+  <div class="pdf-modal">
+    <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Cerrar">×</button>
+    <h3 id="pdf-modal-title">Descargar informe PDF</h3>
+    <p>Introduce tus datos para generar el informe personalizado. No usaremos tu información para nada que no sea enviarte el informe si lo solicitas.</p>
+    <form id="pdf-gate-form" class="form-stack" novalidate autocomplete="off">
+      <div class="field">
+        <label for="pdf-nombre">Nombre *</label>
+        <input type="text" id="pdf-nombre" name="nombre" placeholder="Tu nombre" required maxlength="100" autocomplete="given-name">
+      </div>
+      <div class="field">
+        <label for="pdf-empresa">Empresa</label>
+        <input type="text" id="pdf-empresa" name="empresa" placeholder="Nombre de la empresa" maxlength="120" autocomplete="organization">
+      </div>
+      <div class="field">
+        <label for="pdf-email">Email *</label>
+        <input type="email" id="pdf-email" name="email" placeholder="email@empresa.com" required maxlength="150" autocomplete="email">
+      </div>
+      <button type="submit" class="btn-primary full-width">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M4 13h8M8 3v7M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Generar y descargar PDF
+      </button>
+      <p style="font-size:.72rem;color:var(--text-500);text-align:center;line-height:1.5;">
+        Al generar el informe aceptas nuestra
+        <a href="#" onclick="cerrarPDFModal();abrirLegal('privacidad');return false;" style="color:var(--teal);">política de privacidad</a>.
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <a class="logo" href="index.html" style="text-decoration:none;">
+        <span class="logo-mark" aria-hidden="true">
+          <svg width="28" height="32" viewBox="0 0 36 40" fill="none">
+            <line x1="2" y1="38" x2="18" y2="6" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="34" y1="38" x2="18" y2="6" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+            <line x1="9" y1="25" x2="27" y2="25" stroke="#00C49A" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="18" cy="6" r="4.5" fill="#00C49A"/>
+          </svg>
+        </span>
+        <span>
+          <span class="logo-name">ATLAS</span>
+          <span class="logo-sub">Certificados de Ahorro Energético</span>
+        </span>
+      </a>
+      <p class="footer-tagline">Convertimos el ahorro en valor.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="ayuda.html">Cómo funciona</a>
+      <a href="calculadora.html">Calculadora</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="#" onclick="abrirLegal('aviso-legal');return false;">Aviso Legal</a>
+      <a href="#" onclick="abrirLegal('privacidad');return false;">Privacidad</a>
+    </nav>
+    <div class="footer-right">
+      <p class="footer-copy">
+        © 2026 ATLAS CAE, S.L.<br>
+        <a href="mailto:equipo@atlascae.es" style="color:var(--teal);text-decoration:none;font-size:.78rem;">equipo@atlascae.es</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Legales (reutilizados en todas las páginas) -->
+<div id="aviso-legal" class="legal-overlay" role="dialog" aria-modal="true" aria-labelledby="al-title">
+  <div class="legal-container">
+    <button class="legal-close" onclick="cerrarLegal('aviso-legal')" aria-label="Cerrar">×</button>
+    <h1 id="al-title">Aviso Legal</h1>
+    <p class="legal-meta">ATLAS CAE, S.L. · <span class="legal-cif">CIF: [CIF PENDIENTE]</span></p>
+    <h2>Identificación del titular</h2>
+    <ul>
+      <li><strong>Razón social:</strong> ATLAS CAE, S.L.</li>
+      <li><strong>Domicilio:</strong> Calle Escorial nº 20, Escalera 8, 1º B, 28690, Madrid</li>
+      <li><strong>Email:</strong> legal@atlascae.es</li>
+    </ul>
+    <h2>Condiciones de uso</h2>
+    <p>El acceso a este sitio implica la aceptación de estas condiciones. Los contenidos son informativos y no constituyen asesoramiento vinculante.</p>
+  </div>
+</div>
+<div id="privacidad" class="legal-overlay" role="dialog" aria-modal="true" aria-labelledby="pp-title">
+  <div class="legal-container">
+    <button class="legal-close" onclick="cerrarLegal('privacidad')" aria-label="Cerrar">×</button>
+    <h1 id="pp-title">Política de Privacidad</h1>
+    <p class="legal-meta">ATLAS CAE, S.L. · RGPD y LOPDGDD</p>
+    <h2>Responsable</h2>
+    <p>ATLAS CAE, S.L. · Calle Escorial nº 20, Esc. 8, 1º B, 28690 Madrid · legal@atlascae.es</p>
+    <h2>Finalidad</h2>
+    <p>Gestionar consultas y el contacto comercial relacionado con los servicios de ATLAS CAE.</p>
+    <h2>Derechos</h2>
+    <p>Puedes ejercitar tus derechos ARCO+ escribiendo a <strong>legal@atlascae.es</strong> o reclamar ante la AEPD (www.aepd.es).</p>
+  </div>
+</div>
+
+<div id="cookie-banner" class="hidden" role="complementary" aria-label="Aviso de cookies">
+  <p>Esta web usa únicamente cookies técnicas necesarias.</p>
+  <button onclick="cerrarCookieBanner()">Entendido</button>
+</div>
+
+<!-- jsPDF — solo en esta página -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/main.js"></script>
+<script src="js/calculadora.js"></script>
+</body>
+</html>
