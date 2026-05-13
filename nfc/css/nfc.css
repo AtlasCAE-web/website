@@ -1,0 +1,641 @@
+/* ============================================================
+   ATLAS CAE — NFC Landing
+   Mobile-first · Dark · Premium
+   ============================================================ */
+
+/* ── Reset & base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --noche:    #0A1628;
+  --noche-2:  #0f1e36;
+  --noche-3:  #162540;
+  --teal:     #00C49A;
+  --teal-dim: rgba(0, 196, 154, 0.12);
+  --teal-glow:rgba(0, 196, 154, 0.25);
+  --cielo:    #1B9ED4;
+  --white:    #ffffff;
+  --white-60: rgba(255,255,255,0.60);
+  --white-30: rgba(255,255,255,0.30);
+  --white-10: rgba(255,255,255,0.10);
+  --white-06: rgba(255,255,255,0.06);
+
+  --ff-display: 'Montserrat', sans-serif;
+  --ff-body:    'Inter', sans-serif;
+
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
+
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --max-w: 440px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--noche);
+  color: var(--white);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ── Layout container ── */
+section, footer {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* ── Reveal animation ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Section label ── */
+.section-label {
+  font-family: var(--ff-display);
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  padding-top: max(56px, env(safe-area-inset-top, 0px) + 40px);
+  padding-bottom: 56px;
+  padding-inline: 24px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  animation: fadeUp 0.7s ease both;
+}
+
+/* Logo */
+.logo-wrap {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white-06);
+  border: 1px solid var(--white-10);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.logo-img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.logo-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text */
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero__name {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 8vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.hero__tagline {
+  font-family: var(--ff-display);
+  font-size: clamp(1rem, 4.2vw, 1.15rem);
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+}
+
+.hero__sub {
+  font-size: 0.875rem;
+  color: var(--white-60);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Decorative rings */
+.hero__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 196, 154, 0.10);
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.hero__ring {
+  width: 320px;
+  height: 320px;
+}
+
+.hero__ring--2 {
+  width: 520px;
+  height: 520px;
+  border-color: rgba(0, 196, 154, 0.05);
+  animation-delay: 1.5s;
+}
+
+
+/* ============================================================
+   MAIN ACTIONS
+   ============================================================ */
+.actions {
+  padding-top: 0;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 20px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-family: var(--ff-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  transition:
+    transform var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.975);
+}
+
+.btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.btn__label {
+  flex: 1;
+}
+
+.btn__arrow {
+  font-size: 1rem;
+  opacity: 0.5;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.btn:hover .btn__arrow,
+.btn:focus-visible .btn__arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.btn__badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--white-10);
+  color: var(--white-60);
+  flex-shrink: 0;
+}
+
+/* WhatsApp */
+.btn--whatsapp {
+  background: rgba(37, 211, 102, 0.10);
+  border-color: rgba(37, 211, 102, 0.25);
+  color: #4ade80;
+}
+
+.btn--whatsapp .btn__icon {
+  background: rgba(37, 211, 102, 0.15);
+  color: #4ade80;
+}
+
+.btn--whatsapp:hover,
+.btn--whatsapp:focus-visible {
+  background: rgba(37, 211, 102, 0.16);
+  box-shadow: 0 0 0 1px rgba(37, 211, 102, 0.35), 0 8px 24px rgba(37, 211, 102, 0.12);
+}
+
+/* LinkedIn */
+.btn--linkedin {
+  background: rgba(10, 102, 194, 0.12);
+  border-color: rgba(10, 102, 194, 0.30);
+  color: #60a5fa;
+}
+
+.btn--linkedin .btn__icon {
+  background: rgba(10, 102, 194, 0.18);
+  color: #60a5fa;
+}
+
+.btn--linkedin:hover,
+.btn--linkedin:focus-visible {
+  background: rgba(10, 102, 194, 0.18);
+  box-shadow: 0 0 0 1px rgba(10, 102, 194, 0.40), 0 8px 24px rgba(10, 102, 194, 0.12);
+}
+
+/* Email */
+.btn--email {
+  background: var(--teal-dim);
+  border-color: rgba(0, 196, 154, 0.25);
+  color: var(--teal);
+}
+
+.btn--email .btn__icon {
+  background: rgba(0, 196, 154, 0.15);
+  color: var(--teal);
+}
+
+.btn--email:hover,
+.btn--email:focus-visible {
+  background: rgba(0, 196, 154, 0.18);
+  box-shadow: 0 0 0 1px rgba(0, 196, 154, 0.35), 0 8px 24px var(--teal-glow);
+}
+
+/* Web */
+.btn--web {
+  background: var(--white-06);
+  border-color: var(--white-10);
+  color: var(--white);
+}
+
+.btn--web .btn__icon {
+  background: var(--white-10);
+  color: var(--white-60);
+}
+
+.btn--web:hover,
+.btn--web:focus-visible {
+  background: var(--white-10);
+  border-color: var(--white-30);
+}
+
+/* Dossier */
+.btn--dossier {
+  background: var(--white-06);
+  border-color: var(--white-10);
+  color: var(--white-60);
+}
+
+.btn--dossier .btn__icon {
+  background: var(--white-10);
+  color: var(--white-30);
+}
+
+.btn--dossier:hover,
+.btn--dossier:focus-visible {
+  background: var(--white-10);
+}
+
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about {
+  padding-top: 8px;
+  padding-bottom: 40px;
+}
+
+.about__text {
+  font-size: 0.9375rem;
+  color: var(--white-60);
+  line-height: 1.75;
+  border-left: 2px solid var(--teal);
+  padding-left: 16px;
+}
+
+
+/* ============================================================
+   CHIPS
+   ============================================================ */
+.chips {
+  padding-top: 8px;
+  padding-bottom: 40px;
+}
+
+.chips__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 100px;
+  font-size: 0.775rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: var(--white-06);
+  border: 1px solid var(--white-10);
+  color: var(--white-60);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.chip--accent {
+  background: var(--teal-dim);
+  border-color: rgba(0, 196, 154, 0.30);
+  color: var(--teal);
+}
+
+.chip:hover {
+  border-color: var(--white-30);
+  color: var(--white);
+}
+
+.chip--accent:hover {
+  border-color: rgba(0, 196, 154, 0.60);
+}
+
+
+/* ============================================================
+   TEAM
+   ============================================================ */
+.team {
+  padding-top: 8px;
+  padding-bottom: 40px;
+}
+
+.team__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.team-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--white-06);
+  border: 1px solid var(--white-10);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.team-card:hover {
+  background: var(--white-10);
+  border-color: var(--white-30);
+}
+
+.team-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--teal-dim);
+  border: 1px solid rgba(0, 196, 154, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.team-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.team-card__name {
+  font-family: var(--ff-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.team-card__role {
+  font-size: 0.75rem;
+  color: var(--white-60);
+  margin-top: 1px;
+}
+
+.team-card__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(10, 102, 194, 0.15);
+  border: 1px solid rgba(10, 102, 194, 0.25);
+  color: #60a5fa;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.team-card__link:hover,
+.team-card__link:focus-visible {
+  background: rgba(10, 102, 194, 0.28);
+  border-color: rgba(10, 102, 194, 0.50);
+  transform: scale(1.08);
+}
+
+.team-card__link:active {
+  transform: scale(0.94);
+}
+
+
+/* ============================================================
+   SECOND WHATSAPP
+   ============================================================ */
+.whatsapp-alt {
+  padding-top: 0;
+  padding-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.whatsapp-alt__label {
+  font-size: 0.775rem;
+  color: var(--white-30);
+  letter-spacing: 0.04em;
+}
+
+.whatsapp-alt__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(74, 222, 128, 0.65);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.whatsapp-alt__link:hover,
+.whatsapp-alt__link:focus-visible {
+  color: #4ade80;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  padding-top: 32px;
+  padding-bottom: max(32px, env(safe-area-inset-bottom, 0px) + 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.footer__divider {
+  width: 40px;
+  height: 1px;
+  background: var(--white-10);
+  margin-bottom: 8px;
+}
+
+.footer__email,
+.footer__web {
+  font-size: 0.8125rem;
+  color: var(--white-30);
+  text-decoration: none;
+  transition: color var(--transition);
+  letter-spacing: 0.02em;
+}
+
+.footer__email:hover,
+.footer__web:hover {
+  color: var(--teal);
+}
+
+.footer__copy {
+  font-size: 0.725rem;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.04); }
+}
+
+
+/* ============================================================
+   FOCUS VISIBLE — accessibility
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* ============================================================
+   DESKTOP — very light overrides (it's a mobile page)
+   ============================================================ */
+@media (min-width: 500px) {
+  section, footer {
+    padding-inline: 32px;
+  }
+
+  .hero {
+    padding-inline: 32px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
