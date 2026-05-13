@@ -155,77 +155,111 @@
 </section>
 
 <!-- ═══ EQUIPO ═══════════════════════════════════════════ -->
-<section style="background:var(--dark-950);border-bottom:1px solid var(--border);" aria-labelledby="equipo-title">
-  <div style="max-width:1280px;margin:0 auto;padding:clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,4.5rem) 2.5rem;">
-    <div class="reveal">
-      <div class="section-label">El equipo</div>
-      <h2 class="section-title" id="equipo-title">Cinco co-fundadores.<br>Una sola dirección.</h2>
-    </div>
+<section class="team-section" aria-labelledby="equipo-title">
+
+  <div class="team-section-header reveal">
+    <div class="section-label">El equipo</div>
+    <h2 class="section-title" id="equipo-title">Cinco co-fundadores.<br>Una sola dirección.</h2>
   </div>
 
-  <div class="team-grid" role="list" aria-label="Socios co-fundadores de ATLAS CAE">
+  <div class="team-carousel" id="teamCarousel" role="region" aria-label="Socios co-fundadores de ATLAS CAE">
 
-    <!-- Nicolás Rey — card grande -->
-    <article class="team-card team-card-founder reveal" role="listitem" tabindex="0" aria-label="Nicolás Rey, Co-fundador">
-      <img src="assets/img/team/nico.jpg" alt="Nicolás Rey" loading="lazy"
-           onerror="this.style.display='none';this.nextElementSibling.style.background='var(--dark-600)'">
-      <div class="team-card-overlay" aria-hidden="true"></div>
-      <div class="team-card-body">
-        <span class="team-role">Co-fundador · Innovación y Tecnología</span>
-        <h3 class="team-name">Nicolás Rey</h3>
-        <p class="team-bio">Impulsa la visión tecnológica de ATLAS: sistemas, herramientas y procesos que convierten la complejidad CAE en algo manejable para cualquier empresa.</p>
-      </div>
-    </article>
+    <div class="tc-viewport" id="tcViewport">
+      <div class="tc-track" id="tcTrack" role="list">
 
-    <!-- Marco Rojas -->
-    <article class="team-card reveal delay-1" role="listitem" tabindex="0" aria-label="Marco Rojas, Co-fundador">
-      <img src="assets/img/team/marco.jpg" alt="Marco Rojas" loading="lazy"
-           onerror="this.style.display='none'">
-      <div class="team-card-overlay" aria-hidden="true"></div>
-      <div class="team-card-body">
-        <span class="team-role">Co-fundador · Marketing, Ventas e Innovación</span>
-        <h3 class="team-name">Marco Rojas</h3>
-        <p class="team-bio">Diseña cómo llega ATLAS al mercado y cómo comunica su propuesta de valor de forma clara, directa y diferencial.</p>
-      </div>
-    </article>
+        <!-- 1. David Aparicio -->
+        <article class="tc-slide" role="listitem" tabindex="0" aria-label="David Aparicio, Co-fundador">
+          <div class="tc-img-wrap">
+            <img src="img/team/david.jpg" alt="David Aparicio" loading="lazy" width="360" height="520">
+          </div>
+          <div class="tc-overlay" aria-hidden="true"></div>
+          <div class="tc-body">
+            <span class="tc-role">Co-fundador · Finanzas, Legal y Operadores</span>
+            <h3 class="tc-name">David Aparicio</h3>
+            <p class="tc-bio">Gestiona la estructura financiera y legal de las operaciones, y lidera la relación con los operadores acreditados que compran los certificados.</p>
+          </div>
+        </article>
 
-    <!-- David Aparicio -->
-    <article class="team-card reveal delay-2" role="listitem" tabindex="0" aria-label="David Aparicio, Co-fundador">
-      <img src="assets/img/team/david.jpg" alt="David Aparicio" loading="lazy"
-           onerror="this.style.display='none'">
-      <div class="team-card-overlay" aria-hidden="true"></div>
-      <div class="team-card-body">
-        <span class="team-role">Co-fundador · Finanzas, Legal y Relación con Operadores</span>
-        <h3 class="team-name">David Aparicio</h3>
-        <p class="team-bio">Gestiona la estructura financiera y legal de las operaciones, y lidera la relación con los operadores acreditados que compran los certificados.</p>
-      </div>
-    </article>
+        <!-- 2. Aitana Magdaleno -->
+        <article class="tc-slide" role="listitem" tabindex="0" aria-label="Aitana Magdaleno, Co-fundadora">
+          <div class="tc-img-wrap">
+            <img src="img/team/aitana.jpg" alt="Aitana Magdaleno" loading="lazy" width="360" height="520">
+          </div>
+          <div class="tc-overlay" aria-hidden="true"></div>
+          <div class="tc-body">
+            <span class="tc-role">Co-fundadora · Legal, Ventas y Análisis Técnico</span>
+            <h3 class="tc-name">Aitana Magdaleno</h3>
+            <p class="tc-bio">Combina el conocimiento regulatorio con el análisis técnico para garantizar que cada expediente es sólido desde el primer momento.</p>
+          </div>
+        </article>
 
-    <!-- Aitana Magdaleno -->
-    <article class="team-card reveal delay-3" role="listitem" tabindex="0" aria-label="Aitana Magdaleno, Co-fundadora">
-      <img src="assets/img/team/aitana.jpg" alt="Aitana Magdaleno" loading="lazy"
-           onerror="this.style.display='none'">
-      <div class="team-card-overlay" aria-hidden="true"></div>
-      <div class="team-card-body">
-        <span class="team-role">Co-fundadora · Legal, Ventas y Análisis Técnico</span>
-        <h3 class="team-name">Aitana Magdaleno</h3>
-        <p class="team-bio">Combina el conocimiento regulatorio con el análisis técnico para garantizar que cada expediente es sólido desde el primer momento.</p>
-      </div>
-    </article>
+        <!-- 3. Nicolás Rey -->
+        <article class="tc-slide" role="listitem" tabindex="0" aria-label="Nicolás Rey, Co-fundador">
+          <div class="tc-img-wrap">
+            <img src="img/team/nico.jpg" alt="Nicolás Rey" loading="lazy" width="360" height="520">
+          </div>
+          <div class="tc-overlay" aria-hidden="true"></div>
+          <div class="tc-body">
+            <span class="tc-role">Co-fundador · Innovación y Tecnología</span>
+            <h3 class="tc-name">Nicolás Rey</h3>
+            <p class="tc-bio">Impulsa la visión tecnológica de ATLAS: sistemas, herramientas y procesos que convierten la complejidad CAE en valor real para cada cliente.</p>
+          </div>
+        </article>
 
-    <!-- Telmo Macías -->
-    <article class="team-card reveal delay-4" role="listitem" tabindex="0" aria-label="Telmo Macías, Co-fundador">
-      <img src="assets/img/team/telmo.jpg" alt="Telmo Macías" loading="lazy"
-           onerror="this.style.display='none'">
-      <div class="team-card-overlay" aria-hidden="true"></div>
-      <div class="team-card-body">
-        <span class="team-role">Co-fundador · Finanzas e Infraestructura</span>
-        <h3 class="team-name">Telmo Macías</h3>
-        <p class="team-bio">Responsable de la infraestructura operativa y financiera que sostiene el crecimiento de ATLAS desde su constitución.</p>
-      </div>
-    </article>
+        <!-- 4. Marco Rojas -->
+        <article class="tc-slide" role="listitem" tabindex="0" aria-label="Marco Rojas, Co-fundador">
+          <div class="tc-img-wrap">
+            <img src="img/team/marco.jpg" alt="Marco Rojas" loading="lazy" width="360" height="520">
+          </div>
+          <div class="tc-overlay" aria-hidden="true"></div>
+          <div class="tc-body">
+            <span class="tc-role">Co-fundador · Marketing, Ventas e Innovación</span>
+            <h3 class="tc-name">Marco Rojas</h3>
+            <p class="tc-bio">Diseña cómo llega ATLAS al mercado y comunica la propuesta de valor de forma clara, directa y diferencial.</p>
+          </div>
+        </article>
 
+        <!-- 5. Telmo Macías -->
+        <article class="tc-slide" role="listitem" tabindex="0" aria-label="Telmo Macías, Co-fundador">
+          <div class="tc-img-wrap">
+            <img src="img/team/telmo.jpg" alt="Telmo Macías" loading="lazy" width="360" height="520">
+          </div>
+          <div class="tc-overlay" aria-hidden="true"></div>
+          <div class="tc-body">
+            <span class="tc-role">Co-fundador · Finanzas e Infraestructura</span>
+            <h3 class="tc-name">Telmo Macías</h3>
+            <p class="tc-bio">Responsable de la infraestructura operativa y financiera que sostiene el crecimiento de ATLAS desde su constitución.</p>
+          </div>
+        </article>
+
+      </div><!-- /.tc-track -->
+    </div><!-- /.tc-viewport -->
+
+    <!-- Botones de navegación -->
+    <button class="tc-btn tc-btn--prev" id="tcPrev" aria-label="Anterior">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M12.5 4.5L7 10l5.5 5.5" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="tc-btn tc-btn--next" id="tcNext" aria-label="Siguiente">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M7.5 4.5L13 10l-5.5 5.5" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+  </div><!-- /.team-carousel -->
+
+  <!-- Indicadores de posición -->
+  <div class="tc-dots" id="tcDots" role="tablist" aria-label="Navegar al miembro">
+    <button class="tc-dot" role="tab" aria-selected="true"  aria-label="David Aparicio"></button>
+    <button class="tc-dot" role="tab" aria-selected="false" aria-label="Aitana Magdaleno"></button>
+    <button class="tc-dot" role="tab" aria-selected="false" aria-label="Nicolás Rey"></button>
+    <button class="tc-dot" role="tab" aria-selected="false" aria-label="Marco Rojas"></button>
+    <button class="tc-dot" role="tab" aria-selected="false" aria-label="Telmo Macías"></button>
   </div>
+
 </section>
 
 <!-- ═══ CTA FINAL ════════════════════════════════════════ -->
@@ -316,5 +350,6 @@
 </div>
 
 <script src="js/main.js"></script>
+<script src="js/team-carousel.js"></script>
 </body>
 </html>

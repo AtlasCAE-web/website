@@ -924,17 +924,47 @@ input[type="file"] {
 }
 .pdf-modal-close:hover { background: var(--dark-600); }
 
-/* ── 19. Team grid ─────────────────────────────────── */
-.team-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 340px 340px;
-  gap: 1.5rem;
-  max-width: 1280px;
-  margin: 2.5rem auto 0;
-  padding: 0 clamp(1.25rem,5vw,4.5rem) clamp(4rem,8vw,7rem);
+/* ── 19. Team carousel ─────────────────────────────── */
+.team-section {
+  background: var(--dark-950);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(4rem,8vw,8rem) 0 clamp(4rem,8vw,7rem);
+  overflow: hidden;
 }
-.team-card {
+
+.team-section-header {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem,5vw,4.5rem) 3.5rem;
+}
+
+/* Carousel wrapper */
+.team-carousel {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Viewport — clips the track */
+.tc-viewport {
+  overflow: hidden;
+  cursor: grab;
+}
+.tc-viewport.is-grabbing { cursor: grabbing; }
+
+/* Track — flex row of slides */
+.tc-track {
+  display: flex;
+  transition: transform .6s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tc-track.no-transition { transition: none !important; }
+
+/* Individual slide */
+.tc-slide {
+  flex: 0 0 auto;
   position: relative;
   border-radius: var(--r-xl);
   overflow: hidden;
@@ -942,56 +972,132 @@ input[type="file"] {
   border: 1px solid var(--border);
   transition: box-shadow .35s;
 }
-.team-card:hover {
-  box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px var(--teal-border);
+.tc-slide:hover,
+.tc-slide:focus-visible {
+  box-shadow: 0 24px 64px rgba(0,0,0,.55), 0 0 0 1px rgba(0,196,154,.28);
+  outline: none;
 }
-.team-card-founder { grid-row: 1 / 3; }
-.team-card img {
+
+/* Photo */
+.tc-img-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.tc-img-wrap img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center top;
+  object-fit: cover;
+  object-position: center 18%;
   display: block;
-  transition: transform .5s cubic-bezier(.16,1,.3,1), filter .35s;
-  filter: grayscale(15%);
+  filter: grayscale(12%) brightness(.94);
+  transition: transform .65s cubic-bezier(.16,1,.3,1), filter .45s;
+  will-change: transform;
 }
-.team-card:hover img { transform: scale(1.03); filter: grayscale(0%); }
-.team-card-overlay {
+.tc-slide:hover .tc-img-wrap img,
+.tc-slide:focus-visible .tc-img-wrap img {
+  transform: scale(1.05);
+  filter: grayscale(0%) brightness(1);
+}
+
+/* Dark gradient over photo */
+.tc-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(
     to bottom,
-    transparent 35%,
-    rgba(7,9,14,.4) 55%,
-    rgba(7,9,14,.92) 80%,
-    rgba(7,9,14,.98) 100%
+    transparent 26%,
+    rgba(6,13,26,.22) 46%,
+    rgba(6,13,26,.80) 70%,
+    rgba(6,13,26,.97) 100%
   );
+  pointer-events: none;
 }
-.team-card-body {
+
+/* Text body */
+.tc-body {
   position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 1.5rem 1.75rem;
+  padding: 1.75rem 1.875rem 1.875rem;
 }
-.team-card-founder .team-card-body { padding: 2rem 2.25rem; }
-.team-role {
-  font-size: .7rem; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--teal); margin-bottom: .35rem; display: block;
-}
-.team-name {
-  font-size: 1.15rem; font-weight: 800;
-  color: var(--text-100); letter-spacing: -.01em;
-}
-.team-card-founder .team-name { font-size: 1.45rem; }
-.team-bio {
-  font-size: .84rem; color: var(--text-500); line-height: 1.55;
-  max-width: 38ch; max-height: 0; overflow: hidden;
-  transition: max-height .4s cubic-bezier(.16,1,.3,1), opacity .3s, margin-top .3s;
-  opacity: 0; margin-top: 0;
-}
-.team-card:hover .team-bio { max-height: 100px; opacity: 1; margin-top: .5rem; }
-.team-card-founder::after {
+.tc-body::before {
   content: '';
-  position: absolute; top: 1.5rem; left: 1.75rem;
-  width: 36px; height: 3px;
+  position: absolute; top: 0; left: 1.875rem;
+  width: 28px; height: 3px;
   background: var(--teal); border-radius: 2px;
-  box-shadow: 0 0 12px rgba(0,196,154,.5);
+  box-shadow: 0 0 10px rgba(0,196,154,.5);
+}
+.tc-role {
+  display: block;
+  font-size: .66rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: .4rem;
+}
+.tc-name {
+  font-size: 1.18rem; font-weight: 800;
+  color: var(--text-100); letter-spacing: -.01em;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+}
+.tc-bio {
+  font-size: .82rem; color: var(--text-500); line-height: 1.55;
+  max-height: 0; overflow: hidden; opacity: 0; margin-top: 0;
+  transition: max-height .45s cubic-bezier(.16,1,.3,1),
+              opacity .35s, margin-top .35s;
+}
+.tc-slide:hover .tc-bio,
+.tc-slide:focus-visible .tc-bio {
+  max-height: 120px; opacity: 1; margin-top: .45rem;
+}
+
+/* Prev / Next buttons */
+.tc-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 48px; height: 48px;
+  background: rgba(10,22,40,.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  color: var(--text-100);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .25s, border-color .25s, box-shadow .25s,
+              transform .25s;
+  flex-shrink: 0;
+}
+.tc-btn:hover {
+  background: rgba(0,196,154,.2);
+  border-color: rgba(0,196,154,.5);
+  box-shadow: 0 0 22px rgba(0,196,154,.22);
+  transform: translateY(-50%) scale(1.08);
+}
+.tc-btn--prev { left:  clamp(.75rem, 2vw, 1.5rem); }
+.tc-btn--next { right: clamp(.75rem, 2vw, 1.5rem); }
+
+/* Dots */
+.tc-dots {
+  display: flex; gap: .6rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.tc-dot {
+  width: 8px; height: 8px;
+  border-radius: 4px; border: none; padding: 0;
+  cursor: pointer;
+  background: rgba(255,255,255,.18);
+  transition: background .3s,
+              width .38s cubic-bezier(.16,1,.3,1),
+              box-shadow .3s;
+  flex-shrink: 0;
+}
+.tc-dot.is-active {
+  background: var(--teal);
+  width: 28px;
+  box-shadow: 0 0 10px rgba(0,196,154,.55);
+}
+.tc-dot:hover:not(.is-active) {
+  background: rgba(255,255,255,.38);
 }
 
 /* ── 20. Values / nosotros ─────────────────────────── */
@@ -1344,11 +1450,7 @@ textarea:focus-visible {
   .calc-intro  { position: static; }
   .contact-layout { grid-template-columns: 1fr; }
   .values-grid { grid-template-columns: 1fr 1fr; }
-  .team-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 320px 320px 320px;
-  }
-  .team-card-founder { grid-column: 1 / 3; grid-row: 1; }
+  /* team-carousel — nada que ajustar a 1100px, el JS recalcula */
 }
 
 @media (max-width: 860px) {
@@ -1402,12 +1504,8 @@ textarea:focus-visible {
   .stat-item     { padding: 1.1rem .75rem; }
   .stat-num      { font-size: 1.55rem; }
 
-  /* Team */
-  .team-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 260px 260px 260px;
-  }
-  .team-card-founder { grid-column: 1 / 3; }
+  /* Team carousel — botones más pequeños en tablet */
+  .tc-btn { width: 42px; height: 42px; }
 
   /* Forms */
   .form-row { grid-template-columns: 1fr; }
@@ -1458,12 +1556,11 @@ textarea:focus-visible {
   /* Values: 1 column */
   .values-grid { grid-template-columns: 1fr; }
 
-  /* Team: 1 column */
-  .team-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 260px);
-  }
-  .team-card-founder { grid-column: 1; }
+  /* Team carousel — botones más cercanos al borde en móvil */
+  .tc-btn { width: 38px; height: 38px; }
+  .tc-btn--prev { left: .4rem; }
+  .tc-btn--next { right: .4rem; }
+  .tc-name { font-size: 1.08rem; }
 
   /* Steps: tighter */
   .step     { gap: .75rem; padding: 1.25rem 0; }
