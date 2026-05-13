@@ -220,38 +220,119 @@
     const btn  = document.getElementById('btn-enviar');
     if (!form || !btn) return;
 
+    const errEl    = document.getElementById('justificacion-error');
+    const errSpan  = errEl?.querySelector('span');
+    const successEl = document.getElementById('upload-success');
+
+    function showError(msg) {
+      if (errSpan) errSpan.textContent = msg;
+      else if (errEl) errEl.textContent = msg;
+      if (errEl) errEl.style.display = 'flex';
+      console.error('[ATLAS] Error mostrado al usuario:', msg);
+    }
+
+    function hideError() {
+      if (errEl) errEl.style.display = 'none';
+    }
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
       if (btn.disabled) return;
 
-      /* Collect files for real submission */
+      const nombreInput = form.querySelector('[name="nombre"]');
+      const emailInput  = form.querySelector('[name="email"]');
+      const emailVal    = emailInput?.value.trim() || '';
+
+      hideError();
+
+      if (!nombreInput?.value.trim()) {
+        showError('El nombre es obligatorio.');
+        nombreInput?.focus();
+        return;
+      }
+      if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailVal)) {
+        showError('Introduce un email válido.');
+        emailInput?.focus();
+        return;
+      }
+
+      const endpoint = form.dataset.endpoint || '';
+      if (!endpoint) {
+        showError('Endpoint no configurado. Actualiza data-endpoint en calculadora.html con la URL de tu backend.');
+        return;
+      }
+
       const formData = new FormData(form);
+
+      // ── Log de diagnóstico (visible en DevTools → Console) ──
+      console.group('[ATLAS Upload] Iniciando envío');
+      console.log('Endpoint:', endpoint);
+      console.log('Campos del formulario:');
+      for (const [k, v] of formData.entries()) {
+        if (v instanceof File) {
+          console.log(`  ${k}: File("${v.name}", ${v.size} bytes, "${v.type || 'sin MIME'}")`);
+        } else {
+          console.log(`  ${k}: "${v}"`);
+        }
+      }
+      console.groupEnd();
+
       btn.disabled = true;
       btn.innerHTML = '<span class="btn-spinner"></span>Enviando…';
 
+      let res, data;
       try {
-        /* Replace with your actual backend endpoint */
-        const endpoint = form.dataset.endpoint || '';
-        if (!endpoint) {
-          /* No endpoint configured — show instructional message */
-          throw new Error('Endpoint no configurado. Consulta la documentación de integración.');
-        }
-        const res = await fetch(endpoint, { method: 'POST', body: formData });
-        if (!res.ok) throw new Error('Error del servidor: ' + res.status);
+        res  = await fetch(endpoint, { method: 'POST', body: formData });
+        data = await res.json().catch(() => ({}));
 
-        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <circle cx="8" cy="8" r="8" fill="rgba(0,0,0,.15)"/>
-          <path d="M4.5 8.5l2.5 2.5 4.5-5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>Documentación enviada`;
-        btn.classList.add('btn-success');
+        console.group('[ATLAS Upload] Respuesta del servidor');
+        console.log('Status HTTP:', res.status, res.ok ? '✓ OK' : '✗ ERROR');
+        console.log('Body:', data);
+        console.groupEnd();
+
+        if (!res.ok) {
+          throw new Error(data.message || 'Error del servidor (' + res.status + '). Inténtalo de nuevo.');
+        }
+
+        const caseId = data.caseId || '';
+        console.log('[ATLAS Upload] Éxito. CaseId:', caseId);
+
+        if (successEl) {
+          const caseIdEl    = document.getElementById('upload-case-id');
+          const emailUsedEl = document.getElementById('upload-email-used');
+          if (caseIdEl)    caseIdEl.textContent    = caseId;
+          if (emailUsedEl) emailUsedEl.textContent  = emailVal;
+          form.style.display     = 'none';
+          successEl.style.display = 'flex';
+        } else {
+          btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="8" fill="rgba(0,0,0,.15)"/>
+            <path d="M4.5 8.5l2.5 2.5 4.5-5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>Documentación enviada`;
+          btn.classList.add('btn-success');
+        }
+
       } catch (err) {
         btn.disabled = false;
         btn.textContent = 'Subir documentación';
-        const errEl = document.getElementById('justificacion-error');
-        if (errEl) {
-          errEl.textContent = err.message;
-          errEl.style.display = 'flex';
+
+        // Distinguir error de red (CORS, servidor caído) de error del servidor
+        const isNetworkError = !res;
+        const mensaje = isNetworkError
+          ? `Error de red: no se pudo conectar con el servidor. ¿Está online? (${err.message})`
+          : err.message;
+
+        console.group('[ATLAS Upload] ERROR');
+        console.error('Tipo:', isNetworkError ? 'Red/CORS' : 'Servidor');
+        console.error('Mensaje:', err.message);
+        if (res) {
+          console.error('HTTP status:', res.status);
+          console.error('Respuesta:', data);
         }
+        console.error('Objeto completo:', err);
+        console.groupEnd();
+
+        showError(mensaje);
       }
     });
   }
