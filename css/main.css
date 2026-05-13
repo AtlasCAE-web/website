@@ -86,14 +86,27 @@ a { color: inherit; }
 .logo {
   display: flex;
   align-items: center;
-  gap: .55rem;
+  gap: .6rem;
   text-decoration: none;
   flex-shrink: 0;
 }
 .logo-mark {
-  width: 36px; height: 36px;
+  width: 36px; height: 40px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+}
+/* Real SVG logo image — scales crisply at any density */
+.logo-symbol-img {
+  display: block;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  /* Retina: SVG scales infinitely so no srcset needed */
+  image-rendering: -webkit-optimize-contrast; /* Safari sharpness */
+}
+.logo:hover .logo-symbol-img {
+  filter: drop-shadow(0 0 6px rgba(0,196,154,.45));
+  transition: filter .25s ease;
 }
 .logo-name {
   font-family: 'Montserrat', sans-serif;

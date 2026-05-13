@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 40" width="36" height="40" role="img" aria-label="ATLAS CAE">
+  <defs>
+    <linearGradient id="alg-legs" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="alg-sphere" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C49A"/>
+      <stop offset="100%" stop-color="#1B9ED4"/>
+    </linearGradient>
+  </defs>
+  <!-- Left leg -->
+  <line x1="3.5" y1="34" x2="17" y2="4.5" stroke="url(#alg-legs)" stroke-width="3.1" stroke-linecap="round"/>
+  <!-- Right leg -->
+  <line x1="30.5" y1="34" x2="17" y2="4.5" stroke="url(#alg-legs)" stroke-width="3.1" stroke-linecap="round"/>
+  <!-- Teal crossbar -->
+  <line x1="9" y1="22" x2="25" y2="22" stroke="#00C49A" stroke-width="2.9" stroke-linecap="round"/>
+  <!-- Base line (subtle) -->
+  <line x1="2" y1="34" x2="32" y2="34" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Apex sphere with gradient -->
+  <circle cx="17" cy="4.5" r="3.5" fill="url(#alg-sphere)"/>
+  <!-- Inner highlight -->
+  <circle cx="15.8" cy="3.3" r="1.15" fill="white" opacity="0.42"/>
+</svg>
