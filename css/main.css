@@ -925,13 +925,24 @@ input[type="file"] {
 .pdf-modal-close:hover { background: var(--dark-600); }
 
 /* ── 19. Team carousel ─────────────────────────────── */
+@keyframes tcFadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes dotGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(0,196,154,.55), 0 0 20px rgba(0,196,154,.2); }
+  50%       { box-shadow: 0 0 18px rgba(0,196,154,.9), 0 0 36px rgba(0,196,154,.45); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .team-carousel.tc-entering { animation: none !important; opacity: 1 !important; }
+}
+
 .team-section {
   background: var(--dark-950);
   border-bottom: 1px solid var(--border);
   padding: clamp(4rem,8vw,8rem) 0 clamp(4rem,8vw,7rem);
   overflow: hidden;
 }
-
 .team-section-header {
   max-width: 1280px;
   margin: 0 auto;
@@ -944,39 +955,62 @@ input[type="file"] {
   max-width: 1280px;
   margin: 0 auto;
 }
+.team-carousel.tc-entering {
+  animation: tcFadeUp .9s cubic-bezier(.22,1,.36,1) both;
+}
 
-/* Viewport — clips the track */
+/* Viewport */
 .tc-viewport {
   overflow: hidden;
   cursor: grab;
+  padding: 16px 0;
+  margin: -16px 0;
 }
 .tc-viewport.is-grabbing { cursor: grabbing; }
 
-/* Track — flex row of slides */
+/* Track */
 .tc-track {
   display: flex;
-  transition: transform .6s cubic-bezier(.16,1,.3,1);
   will-change: transform;
   user-select: none;
   -webkit-user-select: none;
+  transition: transform .72s cubic-bezier(.22,1,.36,1);
 }
 .tc-track.no-transition { transition: none !important; }
 
-/* Individual slide */
+/* Individual slide — default: dimmed & scaled down */
 .tc-slide {
   flex: 0 0 auto;
   position: relative;
   border-radius: var(--r-xl);
   overflow: hidden;
   background: var(--dark-700);
-  border: 1px solid var(--border);
-  transition: box-shadow .35s;
+  border: 1px solid rgba(255,255,255,.06);
+  transform: scale(0.87);
+  opacity: 0.42;
+  transition:
+    transform .65s cubic-bezier(.22,1,.36,1),
+    opacity   .65s cubic-bezier(.22,1,.36,1),
+    box-shadow .5s ease,
+    border-color .5s ease;
+  will-change: transform, opacity;
 }
-.tc-slide:hover,
-.tc-slide:focus-visible {
-  box-shadow: 0 24px 64px rgba(0,0,0,.55), 0 0 0 1px rgba(0,196,154,.28);
-  outline: none;
+/* Adjacent slides */
+.tc-slide[data-pos="near"] {
+  transform: scale(0.93);
+  opacity: 0.65;
 }
+/* Active / center slide */
+.tc-slide[data-pos="active"] {
+  transform: scale(1);
+  opacity: 1;
+  border-color: rgba(0,196,154,.22);
+  box-shadow:
+    0 32px 80px rgba(0,0,0,.65),
+    0 0 0 1px rgba(0,196,154,.18),
+    0 0 48px rgba(0,196,154,.07);
+}
+.tc-slide:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 
 /* Photo */
 .tc-img-wrap {
@@ -989,24 +1023,27 @@ input[type="file"] {
   object-fit: cover;
   object-position: center 18%;
   display: block;
-  filter: grayscale(12%) brightness(.94);
-  transition: transform .65s cubic-bezier(.16,1,.3,1), filter .45s;
+  filter: grayscale(15%) brightness(.9);
+  transition: transform .8s cubic-bezier(.22,1,.36,1), filter .55s ease;
   will-change: transform;
+}
+.tc-slide[data-pos="active"] .tc-img-wrap img {
+  filter: grayscale(0%) brightness(1);
 }
 .tc-slide:hover .tc-img-wrap img,
 .tc-slide:focus-visible .tc-img-wrap img {
-  transform: scale(1.05);
-  filter: grayscale(0%) brightness(1);
+  transform: scale(1.06);
+  filter: grayscale(0%) brightness(1.03);
 }
 
-/* Dark gradient over photo */
+/* Gradient overlay */
 .tc-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(
     to bottom,
-    transparent 26%,
-    rgba(6,13,26,.22) 46%,
-    rgba(6,13,26,.80) 70%,
+    transparent 22%,
+    rgba(6,13,26,.15) 42%,
+    rgba(6,13,26,.76) 66%,
     rgba(6,13,26,.97) 100%
   );
   pointer-events: none;
@@ -1020,31 +1057,42 @@ input[type="file"] {
 .tc-body::before {
   content: '';
   position: absolute; top: 0; left: 1.875rem;
-  width: 28px; height: 3px;
-  background: var(--teal); border-radius: 2px;
+  height: 2px; border-radius: 2px;
+  background: var(--teal);
   box-shadow: 0 0 10px rgba(0,196,154,.5);
+  width: 24px;
+  transition: width .5s cubic-bezier(.22,1,.36,1),
+              box-shadow .5s ease;
 }
+.tc-slide[data-pos="active"] .tc-body::before {
+  width: 44px;
+  box-shadow: 0 0 22px rgba(0,196,154,.85);
+}
+
 .tc-role {
   display: block;
-  font-size: .66rem; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
+  font-size: .64rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
   color: var(--teal); margin-bottom: .4rem;
 }
 .tc-name {
-  font-size: 1.18rem; font-weight: 800;
+  font-size: 1.15rem; font-weight: 800;
   color: var(--text-100); letter-spacing: -.01em;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .tc-bio {
-  font-size: .82rem; color: var(--text-500); line-height: 1.55;
+  font-size: .8rem; color: var(--text-500); line-height: 1.55;
   max-height: 0; overflow: hidden; opacity: 0; margin-top: 0;
-  transition: max-height .45s cubic-bezier(.16,1,.3,1),
-              opacity .35s, margin-top .35s;
+  transition: max-height .5s cubic-bezier(.22,1,.36,1),
+              opacity .4s ease, margin-top .4s ease;
 }
 .tc-slide:hover .tc-bio,
 .tc-slide:focus-visible .tc-bio {
-  max-height: 120px; opacity: 1; margin-top: .45rem;
+  max-height: 130px; opacity: 1; margin-top: .5rem;
 }
 
 /* Prev / Next buttons */
@@ -1053,51 +1101,66 @@ input[type="file"] {
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  width: 48px; height: 48px;
-  background: rgba(10,22,40,.78);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,.13);
+  width: 50px; height: 50px;
+  background: rgba(6,14,28,.88);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: 50%;
-  color: var(--text-100);
+  color: var(--text-200);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  transition: background .25s, border-color .25s, box-shadow .25s,
-              transform .25s;
   flex-shrink: 0;
+  transition:
+    background .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease,
+    color .3s ease,
+    transform .3s cubic-bezier(.22,1,.36,1);
 }
+.tc-btn svg { transition: transform .3s cubic-bezier(.22,1,.36,1); }
+.tc-btn--prev:hover svg { transform: translateX(-2px); }
+.tc-btn--next:hover svg { transform: translateX(2px); }
 .tc-btn:hover {
-  background: rgba(0,196,154,.2);
-  border-color: rgba(0,196,154,.5);
-  box-shadow: 0 0 22px rgba(0,196,154,.22);
-  transform: translateY(-50%) scale(1.08);
+  background: rgba(0,196,154,.14);
+  border-color: rgba(0,196,154,.42);
+  color: var(--teal);
+  box-shadow:
+    0 0 0 1px rgba(0,196,154,.16),
+    0 0 28px rgba(0,196,154,.18),
+    inset 0 0 14px rgba(0,196,154,.06);
+  transform: translateY(-50%) scale(1.1);
 }
-.tc-btn--prev { left:  clamp(.75rem, 2vw, 1.5rem); }
-.tc-btn--next { right: clamp(.75rem, 2vw, 1.5rem); }
+.tc-btn:active { transform: translateY(-50%) scale(0.94); }
+.tc-btn--prev { left:  clamp(.5rem, 2vw, 1.25rem); }
+.tc-btn--next { right: clamp(.5rem, 2vw, 1.25rem); }
 
 /* Dots */
 .tc-dots {
-  display: flex; gap: .6rem;
+  display: flex; gap: .55rem;
   justify-content: center;
   margin-top: 2.5rem;
 }
 .tc-dot {
-  width: 8px; height: 8px;
-  border-radius: 4px; border: none; padding: 0;
+  width: 6px; height: 6px;
+  border-radius: 3px; border: none; padding: 0;
   cursor: pointer;
-  background: rgba(255,255,255,.18);
-  transition: background .3s,
-              width .38s cubic-bezier(.16,1,.3,1),
-              box-shadow .3s;
+  background: rgba(255,255,255,.16);
   flex-shrink: 0;
+  transition:
+    background .4s ease,
+    width .48s cubic-bezier(.22,1,.36,1),
+    box-shadow .4s ease,
+    transform .3s ease;
 }
 .tc-dot.is-active {
   background: var(--teal);
-  width: 28px;
-  box-shadow: 0 0 10px rgba(0,196,154,.55);
+  width: 32px;
+  animation: dotGlow 2.4s ease-in-out infinite;
 }
 .tc-dot:hover:not(.is-active) {
-  background: rgba(255,255,255,.38);
+  background: rgba(255,255,255,.36);
+  transform: scale(1.4);
 }
 
 /* ── 20. Values / nosotros ─────────────────────────── */
