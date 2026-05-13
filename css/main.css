@@ -977,6 +977,8 @@ input[type="file"] {
   transition: transform .72s cubic-bezier(.22,1,.36,1);
 }
 .tc-track.no-transition { transition: none !important; }
+/* Suppress individual slide transitions during instant teleport */
+.tc-track.no-transition .tc-slide { transition: none !important; }
 
 /* Individual slide — default: dimmed & scaled down */
 .tc-slide {

@@ -5,7 +5,7 @@
   /* ── Config ──────────────────────────────────────────── */
   const GAP            = 24;    // px — must match CSS gap
   const SLIDE_HEIGHT   = 520;   // px fixed height
-  const AUTOPLAY_MS    = 7000;  // slow, elegant autoplay
+  const AUTOPLAY_MS    = 7000;  // ms between auto-advances
   const DRAG_THRESHOLD = 50;    // px to commit a swipe
   const VELOCITY_MIN   = 0.28;  // px/ms for velocity-based swipe
 
@@ -22,9 +22,10 @@
   const realSlides = Array.from(track.querySelectorAll('.tc-slide'));
   const N = realSlides.length; // 5
 
-  /* ── Clone full set on each side for true infinite loop ─
-     Final array layout: [c0..c4 | r0..r4 | c0..c4]   (15 total)
-     Snap rule: idx < N → jump to idx+N; idx >= 2N → jump to idx-N  */
+  /* ── Clone full set on each side ─────────────────────────
+     Array layout: [c0..c4 | r0..r4 | c0..c4]  (15 total)
+     Snap rule:  idx < N  → teleport to idx + N
+                 idx >= 2N → teleport to idx - N            */
   const frag1 = document.createDocumentFragment();
   const frag2 = document.createDocumentFragment();
   realSlides.forEach(s => {
@@ -41,12 +42,13 @@
   const allSlides = Array.from(track.querySelectorAll('.tc-slide')); // 15 slides
 
   /* ── State ───────────────────────────────────────────── */
-  let currentIdx   = N;   // start at r0 (real first slide)
+  let currentIdx   = N;     // start at r0 (real David, array index 5)
   let slideW       = 0;
   let autoplayTimer;
+  let isAnimating  = false; // blocks nav during CSS transition
+  let isDragging   = false;
 
   /* drag state */
-  let isDragging   = false;
   let dragStartX   = 0;
   let dragLastX    = 0;
   let dragLastTime = 0;
@@ -75,10 +77,11 @@
   /* ── Offset ──────────────────────────────────────────── */
   function getOffset(idx) {
     const vw = viewport.offsetWidth;
+    // Centers slide[idx] in the viewport
     return (vw - slideW) / 2 - idx * (slideW + GAP);
   }
 
-  /* ── Visual slide states ─────────────────────────────── */
+  /* ── Slide visual states (scale + opacity via CSS) ────── */
   function updateSlideStyles(idx) {
     allSlides.forEach((s, i) => {
       if (i === idx) {
@@ -93,6 +96,7 @@
 
   /* ── Dots ────────────────────────────────────────────── */
   function updateDots(realIdx) {
+    // Safe modulo handles negative indices (e.g. -1 → 4)
     const ri = ((realIdx % N) + N) % N;
     dots.forEach((d, i) => {
       const active = i === ri;
@@ -101,52 +105,61 @@
     });
   }
 
-  /* ── Navigation ──────────────────────────────────────── */
+  /* ── Navigation core ─────────────────────────────────── */
   function applyTranslate(idx) {
     track.style.transform = `translateX(${getOffset(idx)}px)`;
   }
 
-  function goTo(idx, animate) {
-    if (animate === false) {
-      track.classList.add('no-transition');
-    } else {
-      track.classList.remove('no-transition');
-    }
+  /* Animated navigation — blocked while another is in progress */
+  function goTo(idx) {
+    if (isAnimating) return;
+    isAnimating = true;
+    track.classList.remove('no-transition');
     currentIdx = idx;
     applyTranslate(idx);
     updateSlideStyles(idx);
     updateDots(idx - N);
   }
 
-  /* Instant teleport for infinite-loop snap — no visible jump */
+  /* Instant teleport: suppress ALL transitions (track + slides) via CSS,
+     then re-enable in double-RAF so the next goTo() can animate normally */
   function teleport(idx) {
     currentIdx = idx;
-    track.classList.add('no-transition');
+    track.classList.add('no-transition'); // also kills .tc-slide transitions via CSS rule
     applyTranslate(idx);
     updateSlideStyles(idx);
     updateDots(idx - N);
-    requestAnimationFrame(() => requestAnimationFrame(() =>
-      track.classList.remove('no-transition')
-    ));
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      track.classList.remove('no-transition');
+      isAnimating = false;
+    }));
   }
 
   function next() { goTo(currentIdx + 1); }
   function prev() { goTo(currentIdx - 1); }
 
-  /* ── Infinite loop snap on transitionend ─────────────── */
+  /* ── Infinite loop snap ──────────────────────────────── */
   track.addEventListener('transitionend', e => {
     if (e.propertyName !== 'transform') return;
     if (currentIdx < N) {
+      // Reached left clone section → snap to real counterpart
       teleport(currentIdx + N);
     } else if (currentIdx >= 2 * N) {
+      // Reached right clone section → snap to real counterpart
       teleport(currentIdx - N);
+    } else {
+      // Normal slide, no teleport needed
+      isAnimating = false;
     }
   });
 
   /* ── Autoplay ────────────────────────────────────────── */
   function startAutoplay() {
     clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(next, AUTOPLAY_MS);
+    autoplayTimer = setInterval(() => {
+      // Skip tick if user is dragging or a transition is already running
+      if (!isAnimating && !isDragging) next();
+    }, AUTOPLAY_MS);
   }
   function stopAutoplay() {
     clearInterval(autoplayTimer);
@@ -154,6 +167,8 @@
 
   /* ── Drag / swipe ────────────────────────────────────── */
   function onDragStart(x) {
+    // Drag takes over: cancel any running transition immediately
+    isAnimating  = false;
     isDragging   = true;
     dragStartX   = x;
     dragLastX    = x;
@@ -180,13 +195,19 @@
     viewport.classList.remove('is-grabbing');
     track.classList.remove('no-transition');
 
-    const delta = dragLastX - dragStartX;
+    const delta    = dragLastX - dragStartX;
     const fastSwipe = Math.abs(dragVelocity) > VELOCITY_MIN;
 
     if (fastSwipe || Math.abs(delta) >= DRAG_THRESHOLD) {
+      // goTo() checks isAnimating, but drag reset it to false above
       (delta < 0 || dragVelocity < -VELOCITY_MIN) ? next() : prev();
     } else {
-      goTo(currentIdx); // snap back to current
+      // Snap back: re-use goTo's animation without gating issue
+      isAnimating = true;
+      track.classList.remove('no-transition');
+      applyTranslate(currentIdx);
+      updateSlideStyles(currentIdx);
+      // transitionend will clear isAnimating
     }
     startAutoplay();
   }
@@ -207,7 +228,11 @@
 
   /* ── Dots ────────────────────────────────────────────── */
   dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => { goTo(N + i); startAutoplay(); });
+    dot.addEventListener('click', () => {
+      if (isAnimating) return;
+      goTo(N + i);
+      startAutoplay();
+    });
   });
 
   /* ── Keyboard ────────────────────────────────────────── */
@@ -242,11 +267,11 @@
   updateSlideStyles(currentIdx);
   updateDots(0);
 
-  /* Entrance: fade+slide up, then start autoplay */
+  /* Entrance animation, then start autoplay */
   carousel.classList.add('tc-entering');
   requestAnimationFrame(() => requestAnimationFrame(() => {
     track.classList.remove('no-transition');
   }));
-  setTimeout(startAutoplay, 950); // after entrance animation
+  setTimeout(startAutoplay, 950);
 
 })();
