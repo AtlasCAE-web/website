@@ -228,7 +228,6 @@
       if (errSpan) errSpan.textContent = msg;
       else if (errEl) errEl.textContent = msg;
       if (errEl) errEl.style.display = 'flex';
-      console.error('[ATLAS] Error mostrado al usuario:', msg);
     }
 
     function hideError() {
@@ -264,19 +263,6 @@
 
       const formData = new FormData(form);
 
-      // ── Log de diagnóstico (visible en DevTools → Console) ──
-      console.group('[ATLAS Upload] Iniciando envío');
-      console.log('Endpoint:', endpoint);
-      console.log('Campos del formulario:');
-      for (const [k, v] of formData.entries()) {
-        if (v instanceof File) {
-          console.log(`  ${k}: File("${v.name}", ${v.size} bytes, "${v.type || 'sin MIME'}")`);
-        } else {
-          console.log(`  ${k}: "${v}"`);
-        }
-      }
-      console.groupEnd();
-
       btn.disabled = true;
       btn.innerHTML = '<span class="btn-spinner"></span>Enviando…';
 
@@ -285,17 +271,11 @@
         res  = await fetch(endpoint, { method: 'POST', body: formData });
         data = await res.json().catch(() => ({}));
 
-        console.group('[ATLAS Upload] Respuesta del servidor');
-        console.log('Status HTTP:', res.status, res.ok ? '✓ OK' : '✗ ERROR');
-        console.log('Body:', data);
-        console.groupEnd();
-
         if (!res.ok) {
           throw new Error(data.message || 'Error del servidor (' + res.status + '). Inténtalo de nuevo.');
         }
 
         const caseId = data.caseId || '';
-        console.log('[ATLAS Upload] Éxito. CaseId:', caseId);
 
         if (successEl) {
           const caseIdEl    = document.getElementById('upload-case-id');
@@ -321,16 +301,6 @@
         const mensaje = isNetworkError
           ? `Error de red: no se pudo conectar con el servidor. ¿Está online? (${err.message})`
           : err.message;
-
-        console.group('[ATLAS Upload] ERROR');
-        console.error('Tipo:', isNetworkError ? 'Red/CORS' : 'Servidor');
-        console.error('Mensaje:', err.message);
-        if (res) {
-          console.error('HTTP status:', res.status);
-          console.error('Respuesta:', data);
-        }
-        console.error('Objeto completo:', err);
-        console.groupEnd();
 
         showError(mensaje);
       }
