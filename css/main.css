@@ -86,42 +86,24 @@ a { color: inherit; }
 .logo {
   display: flex;
   align-items: center;
-  gap: .6rem;
   text-decoration: none;
   flex-shrink: 0;
 }
-.logo-mark {
-  width: 36px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-/* Real SVG logo image — scales crisply at any density */
-.logo-symbol-img {
+.logo-png-img {
   display: block;
+  height: 38px;
   width: auto;
-  height: 100%;
+  max-width: 200px;
   object-fit: contain;
-  /* Retina: SVG scales infinitely so no srcset needed */
-  image-rendering: -webkit-optimize-contrast; /* Safari sharpness */
-}
-.logo:hover .logo-symbol-img {
-  filter: drop-shadow(0 0 6px rgba(0,196,154,.45));
+  image-rendering: -webkit-optimize-contrast;
   transition: filter .25s ease;
 }
-.logo-name {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.05rem; font-weight: 900;
-  letter-spacing: .12em;
-  color: #fff; text-transform: uppercase;
+.logo-png-footer {
+  height: 30px;
+  max-width: 160px;
 }
-.logo-sub {
-  font-family: 'Montserrat', sans-serif;
-  font-size: .55rem; font-weight: 600;
-  letter-spacing: .12em;
-  color: var(--teal);
-  text-transform: uppercase;
-  display: block;
-  margin-top: 1px;
+.logo:hover .logo-png-img {
+  filter: drop-shadow(0 0 8px rgba(0,196,154,.40));
 }
 
 .header-nav {
