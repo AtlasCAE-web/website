@@ -88,19 +88,25 @@ a { color: inherit; }
   align-items: center;
   text-decoration: none;
   flex-shrink: 0;
+  overflow: visible;
 }
 .logo-png-img {
   display: block;
-  height: 38px;
+  /* PNG has ~25% top / ~8% bottom transparent margin.
+     height: 60px + scale(1.25) → ~50px visible logo in 62px header. */
+  height: 60px;
   width: auto;
-  max-width: 200px;
+  max-width: 280px;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
+  transform: scale(1.25);
+  transform-origin: left center;
   transition: filter .25s ease;
 }
 .logo-png-footer {
-  height: 30px;
-  max-width: 160px;
+  height: 46px;
+  max-width: 200px;
+  transform: scale(1.1);
 }
 .logo:hover .logo-png-img {
   filter: drop-shadow(0 0 8px rgba(0,196,154,.40));
@@ -1532,6 +1538,12 @@ textarea:focus-visible {
   /* Navigation */
   .header-nav    { display: none; }
   .mobile-toggle { display: flex; }
+
+  /* Logo — scale back slightly for narrower header */
+  .logo-png-img {
+    height: 52px;
+    transform: scale(1.15);
+  }
 
   /* Section spacing */
   .section-wrap  { padding: 3rem 1.25rem; }
