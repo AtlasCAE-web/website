@@ -16,3 +16,9 @@ serviceaccount*.json
 coverage/
 dist/
 build/
+
+# NicoOS security
+Sensitive/
+Archive/
+*.pem
+*.key
